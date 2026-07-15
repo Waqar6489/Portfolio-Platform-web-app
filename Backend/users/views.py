@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny, BasePermission
 from rest_framework import generics
 from .models import Project,UserProfile
-from .serializers import RegistrationSerializer, ProjectSerializer, UserProfileSerializer, UserSerializer
+from .serializers import RegistrationSerializer, ProjectSerializer, UserProfileSerializer, UserSerializer,HomepageSerializer
  
 
 # view all project in home page
@@ -12,7 +12,7 @@ from .serializers import RegistrationSerializer, ProjectSerializer, UserProfileS
 @permission_classes([AllowAny])
 def project_view(request):
     projects = Project.objects.all().order_by('-id')
-    serializer = ProjectSerializer(projects, many=True)
+    serializer = HomepageSerializer(projects, many=True)
     return Response(serializer.data)
 
 

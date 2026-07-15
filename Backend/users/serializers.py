@@ -42,4 +42,24 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = '__all__' 
-        read_only_fields = ['user']      
+        read_only_fields = ['user']
+        
+         
+#  make serializer for home page
+class HomepageUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username']
+
+class HomepageUserProfile(serializers.ModelSerializer):
+    user= HomepageUserSerializer(read_only=True)
+    class Meta:
+        model = UserProfile
+        fields = ['user', 'full_name','user_image']
+
+class HomepageSerializer(serializers.ModelSerializer):
+    user_detail= HomepageUserProfile(source='user.userprofile',read_only=True)
+    class Meta:
+        model = Project
+        fields = ['user_detail','title','project_image','short_description','project_link','technologies_used']
+

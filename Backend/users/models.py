@@ -19,9 +19,10 @@ class Project(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     project_image = models.ImageField(upload_to='project_images/', blank=True, null=True)
+    short_description= models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField()
     project_link=models.URLField(max_length=200, blank=True)
-    technologies_used = models.CharField(max_length=200, blank=True) 
+    technologies_used = models.CharField(max_length=200) 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
